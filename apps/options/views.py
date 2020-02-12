@@ -1,8 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-# Create your views here.
+from apps.options.forms import SiteConfiguration
 
 
 def index(request):
-    return HttpResponse('Olá mundo!')
+    if request.method == 'POST':
+        form = SiteConfiguration(request.POST)
+    else:
+        form = SiteConfiguration()
+
+    return render(request, 'options/index.html', {'form': form})

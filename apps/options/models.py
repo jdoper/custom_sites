@@ -18,5 +18,7 @@ class SiteConfiguration(models.Model):
 
     name = models.CharField(max_length=10, primary_key=True)
     style = models.CharField(max_length=15, choices=STYLE_CHOICES, default=PADRAO)
-    group = models.ForeignKey(Group, blank=False, related_query_name='site_configurations', unique=True)
+    group = models.OneToOneField(
+        Group, blank=False, related_query_name='site_configurations', unique=True, on_delete=models.PROTECT
+    )
     created_date = models.DateTimeField(auto_now_add=True)
